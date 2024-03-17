@@ -1,4 +1,4 @@
-package main
+package csv_reader
 
 import (
 	"encoding/csv"
@@ -9,7 +9,7 @@ import (
 
 type FileNameRegistry struct{}
 
-func (FileNameRegistry FileNameRegistry) getFileNamePerCase(scenario string) (string, error) {
+func (FileNameRegistry FileNameRegistry) GetFileNamePerCase(scenario string) (string, error) {
 	switch scenario {
 	case "aoc_01":
 		return "puzzle_data/aoc_01.csv", nil
@@ -43,7 +43,7 @@ func (r realFileOpener) Open(name string) (*os.File, error) {
 	return os.Open(name)
 }
 
-func getScenarioNameFromUser() string {
+func GetScenarioNameFromUser() string {
 	fmt.Print("Enter the name of the scenario you are working on: ")
 
 	var input string
@@ -56,21 +56,21 @@ func getScenarioNameFromUser() string {
 
 }
 
-func getFileNameByScenario(input string, fileRegistry FileNameRegistry) string {
-	fileName, err := fileRegistry.getFileNamePerCase(input)
+func GetFileNameByScenario(input string, fileRegistry FileNameRegistry) string {
+	fileName, err := fileRegistry.GetFileNamePerCase(input)
 
 	if err != nil {
-		getScenarioNameFromUser()
+		GetScenarioNameFromUser()
 	}
 
 	return fileName
 }
 
-func getFileOpenerByScenario(input string, fileRegistry FileNameRegistry) FileOpener {
+func GetFileOpenerByScenario(input string, fileRegistry FileNameRegistry) FileOpener {
 	fileOpener, err := fileRegistry.getCSVOpenerCase(input)
 
 	if err != nil {
-		getScenarioNameFromUser()
+		GetScenarioNameFromUser()
 	}
 
 	return fileOpener
@@ -84,7 +84,7 @@ func _format_file_data(dataFromFile [][]string) []string {
 	return result
 }
 
-func readCSV(fileName string, fileOpener FileOpener) ([]string, error) {
+func ReadCSV(fileName string, fileOpener FileOpener) ([]string, error) {
 
 	// Open the CSV file
 	file, err := fileOpener.Open(fileName)
