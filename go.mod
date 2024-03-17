@@ -1,4 +1,4 @@
-module first_steps_in_go
+module GoProject
 
 go 1.21.6
 
