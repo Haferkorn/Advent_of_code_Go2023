@@ -1,4 +1,4 @@
-package main
+package sum_digits
 
 import (
 	"unicode"
@@ -19,7 +19,7 @@ func _getNumberPerEntry(entry string) int {
 	return 0 // No digits found
 }
 
-func sumDigitsFromEntry(formattedDataList []string) int {
+func SumDigitsFromEntry(formattedDataList []string) int {
 	total_sum := 0
 
 	for _, entry := range formattedDataList {
